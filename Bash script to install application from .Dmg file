@@ -1,18 +1,18 @@
 #!/bin/bash
 cd /private/tmp
 #application name
-appName=""
+appName="Application-Name"
 temp=$TMPDIR$(uuidgen)
 mkdir -p $temp/mount
 arch=$(/usr/bin/arch)
 if [ "$arch" == "arm64" ]; then
     echo "Apple Silicon - Installing $appName"
     # Application Url
-    url="https://applicationurl.dmg"
+    url="https://Application-url.dmg"
 elif [ "$arch" == "i386" ]; then
     echo "Intel - Installing $appName"
         # Application Url
-    url="https://applicationurl.dmg"
+    url="https://Application-url.dmg"
 else
     echo "Unknown Architecture"
 fi
