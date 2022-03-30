@@ -1,0 +1,21 @@
+#!/bin/bash
+cd /private/tmp
+#application name
+appName="Application-Name"
+arch=$(/usr/bin/arch)
+if [ "$arch" == "arm64" ]; then
+    echo "Apple Silicon - Installing $appName"
+    # Application Url
+curl -sS https://Applicatiction-url > $appName.zip
+elif [ "$arch" == "i386" ]; then
+    echo "Intel - Installing $appName"
+        # Application Url
+   curl -sS https://Applicatiction-url > $appName.zip
+else
+    echo "Unknown Architecture"
+fi
+unzip $appName.zip
+cp -r *.app /Applications
+## Clean up /private/tmp and remove zip file
+cd /private/tmp
+sudo rm -rf $appName.zip
