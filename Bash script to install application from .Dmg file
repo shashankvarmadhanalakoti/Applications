@@ -1,0 +1,24 @@
+#!/bin/bash
+cd /private/tmp
+#application name
+appName=""
+temp=$TMPDIR$(uuidgen)
+mkdir -p $temp/mount
+arch=$(/usr/bin/arch)
+if [ "$arch" == "arm64" ]; then
+    echo "Apple Silicon - Installing $appName"
+    # Application Url
+    url="https://applicationurl.dmg"
+elif [ "$arch" == "i386" ]; then
+    echo "Intel - Installing $appName"
+        # Application Url
+    url="https://applicationurl.dmg"
+else
+    echo "Unknown Architecture"
+fi
+curl ${url}> $temp/${appName}.dmg
+yes | hdiutil attach -noverify -nobrowse -mountpoint $temp/mount $temp/${appName}.dmg
+sudo rm -rf /Applications/Docker.app
+cp -r $temp/mount/*.app /Applications
+hdiutil detach $temp/mount
+rm -r $temp
