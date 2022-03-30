@@ -1,0 +1,25 @@
+#!/bin/sh
+# change to /tmp directory 
+cd /private/tmp
+#application name
+appName="Application-Name"
+#application download url
+arch=$(/usr/bin/arch)
+if [ "$arch" == "arm64" ]; then
+    echo "Apple Silicon - Installing $appName"
+    # Application Url
+curl -sS https://Applicatiction-url > $appName.zip
+elif [ "$arch" == "i386" ]; then
+    echo "Intel - Installing $appName"
+        # Application Url
+   curl -sS https://Applicatiction-url > $appName.zip
+else
+    echo "Unknown Architecture"
+fi
+#removing existing application
+ rm -rf /Applications/$appName.app
+#installing New application
+sudo installer -pkg $appName.pkg -target /Applications
+#removing Downloaded Contant
+rm -rf $appName.pkg
+exit 0
