@@ -1,0 +1,4 @@
+requests
+datetime
+pyfiglet
+python-dotenv
